@@ -25,7 +25,7 @@ from torch import nn
 
 from environment import make_env
 
-TOTAL_STEPS = 200_000
+TOTAL_STEPS = 300_000
 BUFFER_SIZE = 50_000
 LEARNING_STARTS = 10_000
 TRAIN_EVERY_STEPS = 4

@@ -143,6 +143,8 @@ def plot_training_performance(log_path: Path, output_path: Path) -> None:
 
     style_axis(steps_axis, "Total training steps", "Steps so far")
 
+    steps_axis.ticklabel_format(axis="y", style="plain")
+
     steps_axis.set_xlabel("Episode", color=TEXT_COLOR)
 
     figure.suptitle(f"Training performance: {log_path}", x=0.02, ha="left", color=TEXT_COLOR)

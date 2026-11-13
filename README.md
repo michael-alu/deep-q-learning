@@ -93,9 +93,9 @@ Chosen by combining the best setting from each member's experiments:
 
 Each member ran 10 experiments of 300,000 steps each. The full tables are in:
 
-- [Michael_Hyperparameter_experiment_results.md](Michael_Hyperparameter_experiment_results.md): learning rate and gamma
-- [Merveille_Hyperparameter_experiment_results.md](Merveille_Hyperparameter_experiment_results.md): batch size
-- [Ivan_Hyperparameter_experiment_results.md](Ivan_Hyperparameter_experiment_results.md): exploration (epsilon)
+- [Michael_Hyperparameter_experiment_results.md](experiment_results/Michael_Hyperparameter_experiment_results.md): learning rate and gamma
+- [Merveille_Hyperparameter_experiment_results.md](experiment_results/Merveille_Hyperparameter_experiment_results.md): batch size
+- [Ivan_Hyperparameter_experiment_results.md](experiment_results/Ivan_Hyperparameter_experiment_results.md): exploration (epsilon)
 
 The models and logs for every experiment are in `models/<member>/`.
 
@@ -119,15 +119,36 @@ Training the final settings for 1,000,000 steps took the agent from about -20 to
 
 ## 4. How to Run
 
+### Project structure
+
+```
+deep-q-learning/
+├── environment.py          Task 1: shared Pong environment with preprocessing
+├── train.py                Task 2: DQN training script
+├── play.py                 Task 3: watch the trained agent play
+├── dqn_model.pth           final trained model
+├── dqn_model.csv           training log of the final model
+├── scripts/
+│   ├── random_agent.py     random agent baseline
+│   └── plot_results.py     draws the training plots
+├── notebooks/
+│   └── colab_experiments.ipynb   runs the experiments on a Colab GPU
+├── experiment_results/     each member's hyperparameter tables
+├── models/                 every experiment's model and log, one folder per member
+└── plots/                  training and experiment plots
+```
+
+### Commands
+
 This project uses [uv](https://docs.astral.sh/uv/).
 
 ```bash
 uv sync
 
-uv run python random_agent.py
+uv run python -m scripts.random_agent
 uv run python train.py
 uv run python play.py
-uv run python plot_results.py
+uv run python -m scripts.plot_results
 ```
 
 `train.py` takes the hyperparameters as flags, for example:
@@ -142,14 +163,14 @@ uv run python train.py --learning-rate 0.0001 --batch-size 128 --epsilon-end 0.0
 uv run python play.py --model models/merveille/experiment_3.pth --episodes 3
 ```
 
-The experiments were run on a Google Colab GPU with `colab_experiments.ipynb`.
+The experiments were run on a Google Colab GPU with `notebooks/colab_experiments.ipynb`.
 
 ## 5. Task Allocation
 
 | Member        | Task                                                                                                                                                            |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Michael Nwuju | Task 2: `train.py` (Q-network, replay buffer, epsilon-greedy, Bellman update, target network), project setup with uv, Colab notebook, plots, final training run |
-| Merveille Munana | Task 1: environment selection and preprocessing (`environment.py`), random agent baseline (`random_agent.py`)                                                |
+| Merveille Munana | Task 1: environment selection and preprocessing (`environment.py`), random agent baseline (`scripts/random_agent.py`)                                                |
 | Manzi Ivan    | Task 3: `play.py` (loading the model and playing greedily in real time)                                                                                         |
 
 Every member ran and documented 10 hyperparameter experiments. See `Task allocation sheet.pdf` for the full breakdown.

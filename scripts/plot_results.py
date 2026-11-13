@@ -5,8 +5,8 @@ Draws the training plots from the CSV logs that train.py writes.
 2. One comparison chart per member: the best run in blue, the worst in orange, the rest in gray.
 
 Run from the project root:
-    uv run python plot_results.py
-    uv run python plot_results.py --log models/merveille/experiment_3.csv
+    uv run python -m scripts.plot_results
+    uv run python -m scripts.plot_results --log models/merveille/experiment_3.csv
 """
 
 import argparse
